@@ -5,11 +5,15 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
-
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import static edu.cs.birzeit.groupassignment222.models.Item.items;
 
 public class MainActivity extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,4 +37,25 @@ public class MainActivity extends AppCompatActivity {
         CaptionedImagesAdapter adapter = new CaptionedImagesAdapter(this,names, ids,prices,ratings);
         recycler.setAdapter(adapter);
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.shopping_menu,menu);
+        return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.items:
+                Intent intent = new Intent(this,MainActivity3.class);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 }

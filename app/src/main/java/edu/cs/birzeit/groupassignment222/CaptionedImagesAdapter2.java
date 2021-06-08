@@ -2,40 +2,43 @@ package edu.cs.birzeit.groupassignment222;
 
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
+import edu.cs.birzeit.groupassignment222.models.order;
 
-import edu.cs.birzeit.groupassignment222.models.Item;
 
-import static edu.cs.birzeit.groupassignment222.models.Item.items;
-public class CaptionedImagesAdapter
-        extends RecyclerView.Adapter<edu.cs.birzeit.groupassignment222.CaptionedImagesAdapter.ViewHolder>  {
+
+public class CaptionedImagesAdapter2
+        extends RecyclerView.Adapter<CaptionedImagesAdapter2.ViewHolder>  {
 
     private String[] names;
     private int[] imageIds;
     private int[] prices;
-    private double[] ratings;
+    String [] colors;
+    private int[] sizes;
+    private int[] quantities;
     private Context mContext;
 
-    public CaptionedImagesAdapter(Context context , String[] names, int[] imageIds, int[] prices, double[] ratings){
+
+    public CaptionedImagesAdapter2( Context mContext,String[] names, int[] imageIds,int[] prices, String[] colors, int[] quantities, int[] sizes) {
         this.names = names;
         this.imageIds = imageIds;
         this.prices = prices;
-        this.ratings = ratings;
-        mContext = context;
+        this.colors = colors;
+        this.quantities = quantities;
+        this.sizes = sizes;
+        this.mContext = mContext;
     }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        CardView v = (CardView) LayoutInflater.from(parent.getContext()).inflate(R.layout.card_captioned_image,
+        CardView v = (CardView) LayoutInflater.from(parent.getContext()).inflate(R.layout.shopping_cart_card,
                 parent,
                 false);
 
@@ -45,36 +48,32 @@ public class CaptionedImagesAdapter
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         CardView cardView = holder.cardView;
-        Item item = new Item();
+        order order = new order ();
 
-        for(int i = 0; i< items.length ; i++){
-            if(items[i].getImageID()==imageIds[position]){
-                item = items[i];
+        for(int i = 0; i< order.getOrders().size() ; i++){
+            if(order.getOrders().get(i).getItem().getImageID()==imageIds[position]){
+                order = order.getOrders().get(i);
             }
         }
 
         ImageView imageView = (ImageView) cardView.findViewById(R.id.image);
-        Drawable dr = ContextCompat.getDrawable(cardView.getContext(), item.getImageID());
+        Drawable dr = ContextCompat.getDrawable(cardView.getContext(), order.getItem().getImageID());
         imageView.setImageDrawable(dr);
 
         TextView txtName = (TextView)cardView.findViewById(R.id.txtName);
-        txtName.setText( item.getName());
+        txtName.setText( order.getItem().getName());
 
         TextView txtPrice = (TextView)cardView.findViewById(R.id.txtPrice);
-        txtPrice.setText("Price : "+prices[position] +" $");
+        txtPrice.setText( "Price : "+order.getItem().getPrice());
 
-        TextView txtRating = (TextView)cardView.findViewById(R.id.txtRating);
-        txtRating.setText("Rating : "+ratings[position] +" /5.0");
+        TextView txtColor = (TextView)cardView.findViewById(R.id.txtColor);
+        txtColor.setText("Color : "+colors[position] );
 
-        Item finalItem = item;
-        cardView.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                Intent intent = new Intent(mContext,MainActivity2.class);
-                intent.putExtra("DATA", finalItem);
-                mContext.startActivity(intent);
-            }
-        });
+        TextView txtSize = (TextView)cardView.findViewById(R.id.txtSize);
+        txtSize.setText("Size : "+sizes[position] );
+
+        TextView txtQuantity = (TextView)cardView.findViewById(R.id.txtQuantity);
+        txtQuantity.setText("Quantity : "+quantities[position] );
     }
 
     @Override

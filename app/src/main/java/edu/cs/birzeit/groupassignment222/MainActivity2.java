@@ -5,16 +5,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.NumberPicker;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.util.*;
 
 import edu.cs.birzeit.groupassignment222.R;
 import edu.cs.birzeit.groupassignment222.models.Item;
+import edu.cs.birzeit.groupassignment222.models.order;
 
 
 public class MainActivity2 extends AppCompatActivity {
@@ -29,8 +35,8 @@ public class MainActivity2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-        Intent intent = getIntent();
 
+        Intent intent = getIntent();
         item = (Item) intent.getSerializableExtra("DATA");
 
         TextView txtName = findViewById(R.id.txtName);
@@ -98,7 +104,47 @@ public class MainActivity2 extends AppCompatActivity {
     }
 
     public void backOnClick(View view) {
-        finish();
-        System.exit(0);
+        Intent intent = new Intent(this,MainActivity.class);
+        startActivity(intent);
     }
+    public void addOnClick(View view) {
+        String selectedColor = availableColorsSpinner.getSelectedItem().toString();
+        String selectedSize = availableSizesSpinner.getSelectedItem().toString();
+        int size = Integer.parseInt(selectedSize);
+        int quantity = quantityPicker.getValue();
+
+        System.out.println(selectedColor);
+        System.out.println(size);
+        System.out.println(quantity);
+
+        order.orders.add(new order (item,selectedColor,size,quantity));
+
+        Intent intent = new Intent(this,MainActivity3.class);
+        intent.putExtra("DATA2", new order (item,selectedColor,size,quantity));
+
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.shopping_menu,menu);
+        return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.items:
+                Intent intent = new Intent(this,MainActivity3.class);
+//                intent.putExtra("DATA2", orders);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+
 }

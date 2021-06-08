@@ -1,5 +1,6 @@
 package edu.cs.birzeit.groupassignment222.models;
 import java.io.Serializable;
+import java.util.Arrays;
 
 import edu.cs.birzeit.groupassignment222.R;
 
@@ -113,5 +114,20 @@ public class Item implements Serializable {
 
     public void setOrdered(boolean ordered) {
         this.ordered = ordered;
+    }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "imageID=" + imageID +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", rating=" + rating +
+                ", manufacturingCountry='" + manufacturingCountry + '\'' +
+                ", availableColors=" + Arrays.toString(availableColors) +
+                ", availableQuantity=" + availableQuantity +
+                ", availableSizes=" + Arrays.toString(availableSizes) +
+                ", ordered=" + ordered +
+                '}';
     }
 }

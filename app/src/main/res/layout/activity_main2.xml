@@ -115,6 +115,7 @@
             android:drawablePadding="10dp"
             android:foregroundGravity="center"
             android:gravity="center"
+            android:onClick="addOnClick"
             android:text="Add To Cart" />
 
 
