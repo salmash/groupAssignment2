@@ -4,7 +4,9 @@ package edu.cs.birzeit.groupassignment222;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.cardview.widget.CardView;
@@ -48,10 +50,10 @@ public class CaptionedImagesAdapter2
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         CardView cardView = holder.cardView;
-        order order = new order ();
+        order order = new order();
 
-        for(int i = 0; i< order.getOrders().size() ; i++){
-            if(order.getOrders().get(i).getItem().getImageID()==imageIds[position]){
+        for (int i = 0; i < order.getOrders().size(); i++) {
+            if (order.getOrders().get(i).getItem().getImageID() == imageIds[position]) {
                 order = order.getOrders().get(i);
             }
         }
@@ -60,28 +62,29 @@ public class CaptionedImagesAdapter2
         Drawable dr = ContextCompat.getDrawable(cardView.getContext(), order.getItem().getImageID());
         imageView.setImageDrawable(dr);
 
-        TextView txtName = (TextView)cardView.findViewById(R.id.txtName);
-        txtName.setText( order.getItem().getName());
+        TextView txtName = (TextView) cardView.findViewById(R.id.txtName);
+        txtName.setText(order.getItem().getName());
 
-        TextView txtPrice = (TextView)cardView.findViewById(R.id.txtPrice);
-        txtPrice.setText( "Price : "+order.getItem().getPrice());
+        TextView txtPrice = (TextView) cardView.findViewById(R.id.txtPrice);
+        txtPrice.setText("Price : " + order.getItem().getPrice());
 
-        TextView txtColor = (TextView)cardView.findViewById(R.id.txtColor);
-        txtColor.setText("Color : "+colors[position] );
+        TextView txtColor = (TextView) cardView.findViewById(R.id.txtColor);
+        txtColor.setText("Color : " + colors[position]);
 
-        TextView txtSize = (TextView)cardView.findViewById(R.id.txtSize);
-        txtSize.setText("Size : "+sizes[position] );
+        TextView txtSize = (TextView) cardView.findViewById(R.id.txtSize);
+        txtSize.setText("Size : " + sizes[position]);
 
-        TextView txtQuantity = (TextView)cardView.findViewById(R.id.txtQuantity);
-        txtQuantity.setText("Quantity : "+quantities[position] );
+        TextView txtQuantity = (TextView) cardView.findViewById(R.id.txtQuantity);
+        txtQuantity.setText("Quantity : " + quantities[position]);
+
     }
-
     @Override
     public int getItemCount() {
         return names.length;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
+        public View imageButton;
         private CardView cardView;
         public ViewHolder(CardView cardView){
             super(cardView);

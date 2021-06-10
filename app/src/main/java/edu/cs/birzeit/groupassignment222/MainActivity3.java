@@ -2,6 +2,7 @@ package edu.cs.birzeit.groupassignment222;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -42,9 +43,10 @@ public class MainActivity3 extends AppCompatActivity {
             quantities[i]=order.getOrders().get(i).getChosenQuantity();
 
         }
-        recycler.setLayoutManager(new GridLayoutManager(this,2));
+        recycler.setLayoutManager(new LinearLayoutManager(this));
         CaptionedImagesAdapter2 adapter = new CaptionedImagesAdapter2(this,names, ids,prices,colors,quantities,sizes);
         recycler.setAdapter(adapter);
+
 
 
     }
@@ -56,48 +58,24 @@ public class MainActivity3 extends AppCompatActivity {
 
 
 
+    public void check_OnClick(View view) {
+        Intent intent = new Intent(this, MainActivity4.class);
+        startActivity(intent);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.mainpage_menu,menu);
+        inflater.inflate(R.menu.home,menu);
         return true;
     }
 
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.items:
-                Intent intent = new Intent(this,MainActivity.class);
-//                intent.putExtra("DATA2", orders);
-                startActivity(intent);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        return true;
     }
 
-
-
-//    public void check_OnClick(View view) {
-//        Intent intent = new Intent(this, MainActivity4.class);
-//        startActivity(intent);
-//    }
-//
-//
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        MenuInflater inflater = getMenuInflater();
-//        inflater.inflate(R.menu.home,menu);
-//        return true;
-//    }
-//
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        Intent intent = new Intent(this, MainActivity.class);
-//        startActivity(intent);
-//        return true;
-//    }
 }

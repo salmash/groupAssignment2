@@ -60,7 +60,7 @@ public class MainActivity2 extends AppCompatActivity {
         populateAvailableSizesSpinner();
 
         quantityPicker = (NumberPicker)findViewById(R.id.quantityPicker);
-        quantityPicker.setMinValue(0);
+        quantityPicker.setMinValue(1);
 
         quantityPicker.setMaxValue(item.getAvailableQuantity());
 
@@ -87,6 +87,7 @@ public class MainActivity2 extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, availableColors);
         availableColorsSpinner.setAdapter(adapter);
+
     }
 
     private void populateAvailableSizesSpinner() {
@@ -108,21 +109,31 @@ public class MainActivity2 extends AppCompatActivity {
         startActivity(intent);
     }
     public void addOnClick(View view) {
-        String selectedColor = availableColorsSpinner.getSelectedItem().toString();
-        String selectedSize = availableSizesSpinner.getSelectedItem().toString();
-        int size = Integer.parseInt(selectedSize);
-        int quantity = quantityPicker.getValue();
+        if (availableColorsSpinner.getSelectedItem().toString().trim().equals("Available Colors")) {
+            Toast.makeText(this, "Error ! Please choose a Color", Toast.LENGTH_SHORT).show();
+            System.out.println("Error ! Please choose a Color");
+        } else if (availableSizesSpinner.getSelectedItem().toString().trim().equals("Available Sizes")) {
+            Toast.makeText(this, "Error ! Please choose a Size", Toast.LENGTH_SHORT).show();
+            System.out.println("Error ! Please choose a Size");
+        } else {
+            Toast.makeText(this, "The Item has been Added to the cart successfully", Toast.LENGTH_SHORT).show();
 
-        System.out.println(selectedColor);
-        System.out.println(size);
-        System.out.println(quantity);
+            String selectedColor = availableColorsSpinner.getSelectedItem().toString();
+            String selectedSize = availableSizesSpinner.getSelectedItem().toString();
+            int size = Integer.parseInt(selectedSize);
+            int quantity = quantityPicker.getValue();
 
-        order.orders.add(new order (item,selectedColor,size,quantity));
+            System.out.println(selectedColor);
+            System.out.println(size);
+            System.out.println(quantity);
 
-        Intent intent = new Intent(this,MainActivity3.class);
-        intent.putExtra("DATA2", new order (item,selectedColor,size,quantity));
+            order.orders.add(new order(item, selectedColor, size, quantity));
+
+            Intent intent = new Intent(this, MainActivity3.class);
+            intent.putExtra("DATA2", new order(item, selectedColor, size, quantity));
 
 
+        }
     }
 
     @Override
@@ -138,7 +149,6 @@ public class MainActivity2 extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.items:
                 Intent intent = new Intent(this,MainActivity3.class);
-//                intent.putExtra("DATA2", orders);
                 startActivity(intent);
                 return true;
             default:

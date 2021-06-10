@@ -2,5 +2,9 @@
 <resources>
     <array name="preloaded_fonts" translatable="false">
 
+        <item>@font/amaranth</item>
+        <item>@font/andada</item>
+        <item>@font/asset</item>
+        <item>@font/philosopher</item>
     </array>
 </resources>

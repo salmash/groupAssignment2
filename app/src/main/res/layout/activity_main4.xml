@@ -1,47 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#424141"
     tools:context=".MainActivity4">
+
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="424dp"
-        android:layout_height="51dp"
-        android:background="#00ACC1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:background="#E44508"
+        android:fontFamily="@font/amaranth"
+        android:foregroundGravity="center"
+        android:gravity="center"
+        android:padding="6dp"
         android:text="Summary"
         android:textColor="#000000"
-        android:textSize="30sp"
+        android:textSize="33sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/summary_recycler"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.142" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/summary_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.001" />
+        app:layout_constraintVertical_bias="0.104" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="120dp"
-        android:text="Total Cost:"
-        android:textColor="#000000"
-        android:textSize="30sp"
-        android:textStyle="bold|italic"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.057"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="347dp"
-        android:layout_height="380dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.44" />
+        app:layout_constraintTop_toBottomOf="@+id/summary_recycler"
+        app:layout_constraintVertical_bias="0.125">
+
+
+        <TextView
+            android:id="@+id/total"
+            style="@style/style"
+            android:layout_margin="3sp"
+            android:text="Total price = "
+            app:layout_constraintHorizontal_bias="0.048"
+            tools:layout_editor_absoluteY="321dp" />
+
+        <TextView
+            android:id="@+id/taxtotal"
+            style="@style/style"
+            android:layout_margin="3sp"
+            android:text="Total price with Tax = "
+            app:layout_constraintHorizontal_bias="0.065"
+            app:layout_constraintVertical_bias="0.287" />
+
+        <TextView
+            android:id="@+id/tax"
+            style="@style/style"
+            android:layout_margin="3sp"
+            android:text="Tax = "
+            app:layout_constraintHorizontal_bias="0.042"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30sp"
+            android:background="#000000"
+            android:fontFamily="@font/amaranth"
+            android:foregroundGravity="center"
+            android:gravity="center"
+            android:onClick="buyOnClick"
+            android:text="Buy"
+            android:textSize="21sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

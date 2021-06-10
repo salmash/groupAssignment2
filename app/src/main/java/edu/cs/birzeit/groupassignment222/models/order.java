@@ -69,4 +69,27 @@ public class order implements Serializable {
                 ", chosenQuantity=" + chosenQuantity +
                 '}';
     }
+
+    public static double CalculateTotal() {
+        double totalPrice = 0;
+        for (int i = 0; i < orders.size(); i++) {
+            totalPrice += orders.get(i).item.getPrice() * (orders.get(i).chosenQuantity);
+        }
+        return totalPrice;
+    }
+
+    public static double tax(){
+        double total = CalculateTotal();
+        double tax ;
+        tax = total * (0.14);
+        return tax;
+    }
+
+    public static double totalwithtax(){
+        double total = CalculateTotal();
+        double tax = tax();
+        double totalTax = total + tax;
+        return totalTax;
+    }
+
 }
